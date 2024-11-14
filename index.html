@@ -29,8 +29,8 @@
             <label for="taxa">Taxa de aplicação (%):</label>
             <input type="number" id="taxa1" name="taxa">
 
-            <label for="taxaipca">Taxa de aplicação (%):</label>
-            <input type="number" id="taxa1" name="taxa">
+            <label for="taxaipca">Taxa estimada IPCA (inflação em %):</label>
+            <input type="number" id="taxaipca1" name="taxa">
 
             <button id="f1-calcular" class="botao2">Calcular</button>
 
@@ -44,24 +44,48 @@
             <label for="capital">Capital Inicial (R$):</label>
             <input type="number" id="capital2" name="capital">
 
+            <label for="aporte">Aporte periódico:</label>
+            <input type="number" id="aporte" name="aporte">
+
             <label for="tempo">Tempo de aplicação:</label>
             <input type="number" id="tempo2" name="tempo">
 
             <label for="taxa">Taxa de aplicação (%):</label>
             <input type="number" id="taxa2" name="taxa">
 
-            <button id="f1-calcular" class="botao2">Calcular</button>
+            <label for="taxaipca">Taxa estimada IPCA (inflação em %):</label>
+            <input type="number" id="taxaipca2" name="taxa">
 
-            <div id="f1-resultado"></div>
+            <button id="f2-calcular" class="botao2">Calcular</button>
+
+            <div id="f2-resultado"></div>
         </form>
     </div>
     <div id="funcao3" class="funcao" style="display:none">
         <h2>Calculadora de tempo de ordenação</h2>
         <h3>Usando 3 diferentes métodos</h3>
+        <form>
+            <label for="velocidade">Velocidade de processamento:</label>
+            <input type="number" id="velocidade" name="velocidade">
+
+            <label for="volume">Volume de dados (megabytes):</label>
+            <input type="number" id="volume" name="volume">
+
+            <button id="f3-calcular" class="botao2">Calcular</button>
+
+            <div id="f3-resultado"></div>
+        </form>
     </div>
     <div id="funcao4" class="funcao" style="display:none">
         <h2>Cálculo da raiz de uma função</h2>
         <h3>Pelo método da bisseção</h3>
+        <form>
+
+            <button id="f4-calcular" class="botao2">Calcular</button>
+
+            <div id="f4-resultado"></div>
+
+        </form>
     </div>
 
     <script src="scripts.js"></script>

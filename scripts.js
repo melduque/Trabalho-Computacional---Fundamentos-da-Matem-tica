@@ -6,7 +6,16 @@ window.onload = function() {
         botoes[i].onclick = function(){
             divFuncao = document.getElementById(botoes[i].value);
             divFuncao.style.display = 'block';
+            NaoClicados(botoes, i);
         };
-        
+    }
+}
+
+function NaoClicados(botoes, i){
+    for(let j = 0; j < botoes.length; j ++){
+        if(j != i){
+            let funcao = document.getElementById(botoes[j].value);
+            funcao.style.display = 'none';
+        }
     }
 }
