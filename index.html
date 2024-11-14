@@ -7,21 +7,53 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Projeto Computacional - Fundamentos da Matemática</h1>
+    <h1>Projeto Computacional</h1>
+    <h2>Fundamentos da Matemática</h2>
     <h5>Melissa Duque Baia | Arthur Coelho de Souza | Felipe Lopes</h5>
     <div id="botoes">
-        <button id="btn-funcao1">Análise de investimentos</button>
-        <button id="btn-funcao2">Investimentos com aportes periódicos</button>
-        <button id="btn-funcao3">Calculadora de tempo de ordenação</button>
-        <button id="btn-funcao4">Cálculo da raiz de uma função</button>
+        <button id="btn-funcao1" class="botao" value="funcao1">Análise de investimentos</button>
+        <button id="btn-funcao2" class="botao" value="funcao2">Investimentos com aportes periódicos</button>
+        <button id="btn-funcao3" class="botao" value="funcao3">Calculadora de tempo de ordenação</button>
+        <button id="btn-funcao4" class="botao" value="funcao4">Cálculo da raiz de uma função</button>
     </div>
     <div id="funcao1" class="funcao" style="display:none">
         <h2>Análise de Investimentos</h2>
         <h3>Variação de valores a juros compostos</h3>
+        <form>
+            <label for="capital">Capital Inicial (R$):</label>
+            <input type="number" id="capital1" name="capital">
+
+            <label for="tempo">Tempo de aplicação:</label>
+            <input type="number" id="tempo1" name="tempo">
+
+            <label for="taxa">Taxa de aplicação (%):</label>
+            <input type="number" id="taxa1" name="taxa">
+
+            <label for="taxaipca">Taxa de aplicação (%):</label>
+            <input type="number" id="taxa1" name="taxa">
+
+            <button id="f1-calcular" class="botao2">Calcular</button>
+
+            <div id="f1-resultado"></div>
+        </form>
     </div>
     <div id="funcao2" class="funcao" style="display:none">
         <h2>Análise de Investimentos</h2>
         <h3>Aportes periódicos</h3>
+        <form>
+            <label for="capital">Capital Inicial (R$):</label>
+            <input type="number" id="capital2" name="capital">
+
+            <label for="tempo">Tempo de aplicação:</label>
+            <input type="number" id="tempo2" name="tempo">
+
+            <label for="taxa">Taxa de aplicação (%):</label>
+            <input type="number" id="taxa2" name="taxa">
+
+            <button id="f1-calcular" class="botao2">Calcular</button>
+
+            <div id="f1-resultado"></div>
+        </form>
     </div>
     <div id="funcao3" class="funcao" style="display:none">
         <h2>Calculadora de tempo de ordenação</h2>
