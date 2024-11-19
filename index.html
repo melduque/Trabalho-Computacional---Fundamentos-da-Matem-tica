@@ -5,11 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Projeto Computacional - Fundamentos da Matemática</title>
     <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
     <h1>Projeto Computacional</h1>
     <h2>Fundamentos da Matemática</h2>
-    <h5>Melissa Duque Baia | Arthur Coelho de Souza | Felipe Lopes</h5>
+    <h5>Melissa Duque Baia | Arthur Coelho de Souza | Felipe Augusto Lima Lopes</h5>
     <div id="botoes">
         <button id="btn-funcao1" class="botao" value="funcao1">Análise de investimentos</button>
         <button id="btn-funcao2" class="botao" value="funcao2">Investimentos com aportes periódicos</button>
@@ -34,8 +35,12 @@
 
             <button id="f1-calcular" class="botao2">Calcular</button>
 
-            <div id="f1-resultado"></div>
         </form>
+        
+        <div id="f1-resultado"></div>
+        <div class="container-grafico">
+            <canvas id="grafico"></canvas>
+        </div>
     </div>
     <div id="funcao2" class="funcao" style="display:none">
         <h2>Análise de Investimentos</h2>
