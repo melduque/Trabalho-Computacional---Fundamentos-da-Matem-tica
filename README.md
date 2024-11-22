@@ -1,4 +1,6 @@
-# Sistema de Análise de Funções de Investimento
+# Projeto Computacional da Disciplina Fundamentos da Matemática
+
+Melissa Duque Baia | Arthur Coelho de Souza | Felipe Augusto Lima Lopes
 
 Este é um sistema web desenvolvido em HTML, CSS e JavaScript que permite a análise de investimentos e cálculos diversos. O sistema possui quatro funcionalidades principais:
 
