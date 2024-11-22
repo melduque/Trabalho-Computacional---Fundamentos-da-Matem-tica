@@ -24,10 +24,10 @@
             <label for="capital">Capital Inicial (R$):</label>
             <input type="number" id="capital1" name="capital">
 
-            <label for="tempo">Tempo de aplicação:</label>
+            <label for="tempo">Tempo de aplicação (em meses):</label>
             <input type="number" id="tempo1" name="tempo">
 
-            <label for="taxa">Taxa de aplicação (%):</label>
+            <label for="taxa">Taxa de aplicação (% ao mês):</label>
             <input type="number" id="taxa1" name="taxa">
 
             <label for="taxaipca">Taxa estimada IPCA (inflação em %):</label>
@@ -38,7 +38,7 @@
         </form>
         
         <div id="f1-resultado"></div>
-        <div class="container-grafico">
+        <div class="container-grafico" style="display:none">
             <canvas id="grafico"></canvas>
         </div>
     </div>
@@ -49,13 +49,13 @@
             <label for="capital">Capital Inicial (R$):</label>
             <input type="number" id="capital2" name="capital">
 
-            <label for="aporte">Aporte periódico:</label>
+            <label for="aporte">Aporte mensal:</label>
             <input type="number" id="aporte" name="aporte">
 
-            <label for="tempo">Tempo de aplicação:</label>
+            <label for="tempo">Tempo de aplicação (em meses):</label>
             <input type="number" id="tempo2" name="tempo">
 
-            <label for="taxa">Taxa de aplicação (%):</label>
+            <label for="taxa">Taxa de aplicação (% ao mês):</label>
             <input type="number" id="taxa2" name="taxa">
 
             <label for="taxaipca">Taxa estimada IPCA (inflação em %):</label>
@@ -63,7 +63,7 @@
 
             <button id="f2-calcular" class="botao2">Calcular</button>
 
-            
+           
         </form>
         
         <div id="f2-resultado"></div>
@@ -90,10 +90,60 @@
         <h2>Cálculo da raiz de uma função</h2>
         <h3>Pelo método da bisseção</h3>
         <form>
-
+            <label for="inicio">Início do intervalo:</label>
+            <input type="number" id="inicio" name="inicio" required>
+    
+            <label for="fim">Fim do intervalo:</label>
+            <input type="number" id="fim" name="fim" required>
+    
+            <label for="max-iteracoes">Número máximo de iterações:</label>
+            <input type="number" id="max-iteracoes" name="max-iteracoes" required>
+    
+            <fieldset>
+                <legend>Função Polinomial</legend>
+                <label for="grau">Grau do polinômio:</label>
+                <input type="number" id="grau" name="grau" required>
+    
+                <label for="coeficientes">Coeficientes do polinômio (separados por vírgulas):</label>
+                <input type="text" id="coeficientes" name="coeficientes" placeholder="Ex: 3,2,-1">
+            </fieldset>
+    
+            <fieldset>
+                <legend>Função Exponencial</legend>
+                <label for="k">k:</label>
+                <input type="number" id="k" name="k">
+    
+                <label for="p">p:</label>
+                <input type="number" id="p" name="p">
+    
+                <label for="b">b:</label>
+                <input type="number" id="b" name="b">
+    
+                <label for="q">q:</label>
+                <input type="number" id="q" name="q">
+            </fieldset>
+    
             <button id="f4-calcular" class="botao2">Calcular</button>
-
-            <div id="f4-resultado"></div>
+            <div id="f4-resultado" style="display: none">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>i</th>
+                            <th>x inicial</th>
+                            <th>x médio</th>
+                            <th>x final</th>
+                            <th>y inicial</th>
+                            <th>y médio</th>
+                            <th>y final</th>
+                            <th>Tolerância</th>
+                        </tr>
+                    </thead>
+                    <tbody id="f4-tabela"></tbody>
+                </table>
+                <div class="container-grafico">
+                    <canvas id="grafico-f4"></canvas>
+                </div>
+            </div>
 
         </form>
     </div>
