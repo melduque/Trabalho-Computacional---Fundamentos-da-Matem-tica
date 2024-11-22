@@ -116,3 +116,14 @@ function desenharGrafico(tempo, montantesTaxa, montantesIPCA) {
     });
 }
 
+
+function calcularInvestimento(event){
+    event.preventDefault(); 
+
+    const capital = parseFloat(document.getElementById('capital2').value);
+    
+    const tempo = parseFloat(document.getElementById('tempo2').value);
+    const taxa = parseFloat(document.getElementById('taxa2').value) / 100;
+    const taxaIPCA = parseFloat(document.getElementById('taxaipca2').value) / 100;
+
+}
