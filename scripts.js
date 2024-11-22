@@ -1,4 +1,3 @@
-// Exibir função correta ao clicar
 window.onload = function() {
     let botoes = document.getElementsByClassName('botao');
 
@@ -20,8 +19,10 @@ function NaoClicados(botoes, i){
     }
 }
 
-// FUNÇÃO 1 - ANÁLISE DE INVESTIMENTOS
 document.getElementById('f1-calcular').addEventListener('click', calcularInvestimento);
+let exibirResultados = document.getElementById('container-grafico1');
+exibirResultados.style.display='block';
+
 function calcularInvestimento(event) {
     event.preventDefault(); 
 
@@ -116,16 +117,4 @@ function desenharGrafico(tempo, montantesTaxa, montantesIPCA) {
             },
         },
     });
-}
-
-
-function calcularInvestimento(event){
-    event.preventDefault(); 
-
-    const capital = parseFloat(document.getElementById('capital2').value);
-    
-    const tempo = parseFloat(document.getElementById('tempo2').value);
-    const taxa = parseFloat(document.getElementById('taxa2').value) / 100;
-    const taxaIPCA = parseFloat(document.getElementById('taxaipca2').value) / 100;
-
 }
