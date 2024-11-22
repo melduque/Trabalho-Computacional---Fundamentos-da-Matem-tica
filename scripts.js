@@ -116,4 +116,3 @@ function desenharGrafico(tempo, montantesTaxa, montantesIPCA) {
     });
 }
 
-//O código ficou um pouco extenso, mas acho que dá para deixá-lo mais enxuto. Por enquanto é apenas da primeira função."
