@@ -1,3 +1,4 @@
+// Exibir função correta ao clicar
 window.onload = function() {
     let botoes = document.getElementsByClassName('botao');
 
@@ -10,8 +11,6 @@ window.onload = function() {
         };
     }
 }
-document.getElementById('f1-calcular').addEventListener('click', calcularInvestimento);
-
 function NaoClicados(botoes, i){
     for(let j = 0; j < botoes.length; j ++){
         if(j != i){
@@ -20,6 +19,9 @@ function NaoClicados(botoes, i){
         }
     }
 }
+
+// FUNÇÃO 1 - ANÁLISE DE INVESTIMENTOS
+document.getElementById('f1-calcular').addEventListener('click', calcularInvestimento);
 function calcularInvestimento(event) {
     event.preventDefault(); 
 
