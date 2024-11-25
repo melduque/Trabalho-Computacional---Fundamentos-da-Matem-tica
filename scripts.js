@@ -74,7 +74,7 @@ function desenharGrafico(tempo, montantesTaxa, montantesIPCA) {
     chartInstance = new Chart(context, {
         type: 'line',
         data: {
-            labels: tempo.map(t => t.toFixed(1) + ' anos'),
+            labels: tempo.map(t => t.toFixed(1) + ' meses'),
             datasets: [
                 {
                     label: 'Montante da aplicação',
@@ -106,6 +106,112 @@ function desenharGrafico(tempo, montantesTaxa, montantesIPCA) {
                     title: {
                         display: true,
                         text: 'Tempo (anos)',
+                    },
+                },
+                y: {
+                    title: {
+                        display: true,
+                        text: 'Montante (R$)',
+                    },
+                },
+            },
+        },
+    });
+}
+
+// função 2) aporte de investimentos
+document.getElementById('f2-calcular').addEventListener('click', calcularInvestimentoComAportes);
+let exibirResultados2 = document.getElementById('f2-resultado');
+
+function calcularInvestimentoComAportes(event) {
+    event.preventDefault();
+
+    const capital = parseFloat(document.getElementById('capital2').value);
+    const aporte = parseFloat(document.getElementById('aporte').value);
+    const tempo = parseFloat(document.getElementById('tempo2').value);
+    const taxa = parseFloat(document.getElementById('taxa2').value) / 100;
+    const taxaIPCA = parseFloat(document.getElementById('taxaipca2').value) / 100;
+
+    
+
+    if (isNaN(capital) || isNaN(aporte) || isNaN(tempo) || isNaN(taxa) || isNaN(taxaIPCA)) {
+        alert('Por favor, insira valores válidos.');
+        return;
+    }
+
+    const montantesTaxa = [];
+    const montantesIPCA = [];
+    const tempos = [];
+
+    let montanteTaxaAtual = capital;
+    let montanteIPCAAtual = capital;
+
+    for (let t = 0; t <= tempo; t++) {
+        tempos.push(t);
+        if (t > 0) {
+        
+
+        montanteTaxaAtual = montanteTaxaAtual * (1 + taxa) + aporte;
+        montanteIPCAAtual = montanteIPCAAtual * (1 + taxaIPCA) + aporte;
+        }
+        else{
+            montanteTaxaAtual = montanteTaxaAtual * (1 + taxa);
+            montanteIPCAAtual = montanteIPCAAtual * (1 + taxaIPCA);
+        }
+        montantesTaxa.push(montanteTaxaAtual);
+        montantesIPCA.push(montanteIPCAAtual);
+    }
+
+    const diferenca = montantesTaxa[montantesTaxa.length - 1] - montantesIPCA[montantesIPCA.length - 1];
+
+    exibirResultados2.innerHTML = `
+        <p>Montante final com taxa: R$ ${montantesTaxa[montantesTaxa.length - 1].toFixed(2)}</p>
+        <p>Montante final com IPCA: R$ ${montantesIPCA[montantesIPCA.length - 1].toFixed(2)}</p>
+        <p>Diferença: R$ ${diferenca.toFixed(2)}</p>
+    `;
+
+    document.getElementById('container-grafico2').style.display = 'block';
+
+    desenharGraficoAportes(tempos, montantesTaxa, montantesIPCA);
+}
+
+let chartInstance2;
+function desenharGraficoAportes(tempo, montantesTaxa, montantesIPCA) {
+    const containerChart = document.querySelector('#grafico2'); 
+    const context = containerChart.getContext('2d');
+
+    if (chartInstance2) {
+        chartInstance2.destroy();
+    }
+
+    chartInstance2 = new Chart(context, {
+        type: 'line',
+        data: {
+            labels: tempo.map(t => `${t} meses`),
+            datasets: [
+                {
+                    label: 'Montante com aplicação',
+                    data: montantesTaxa,
+                    backgroundColor: '#555',
+                    borderColor: 'gray',
+                    fill: false,
+                },
+                {
+                    label: 'Montante com IPCA',
+                    data: montantesIPCA,
+                    backgroundColor: '#000',
+                    borderColor: 'orange',
+                    fill: false,
+                }
+            ],
+        },
+        options: {
+            responsive: true,
+            scales: {
+                x: {
+                    title: {
+                        display: true,
+                        text: 'Tempo (meses)',
                     },
                 },
                 y: {
