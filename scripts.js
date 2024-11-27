@@ -116,8 +116,18 @@ function desenharGrafico(tempo, montantesTaxa, montantesIPCA) {
                 },
             },
         },
+       
+            
     });
+    window.addEventListener('resize', function() {
+        if (chartInstance) {
+            chartInstance.resize();
+        }
+    });
+
 }
+
+
 
 // função 2) aporte de investimentos
 document.getElementById('f2-calcular').addEventListener('click', calcularInvestimentoComAportes);
@@ -223,4 +233,118 @@ function desenharGraficoAportes(tempo, montantesTaxa, montantesIPCA) {
             },
         },
     });
+    window.addEventListener('resize', function() {
+        if (chartInstance) {
+            chartInstance.resize();
+        }
+    });
+
+}
+
+
+// Função 3) Calculadora de Tempo de Ordenação
+document.getElementById('f3-calcular').addEventListener('click', calcularTempoOrdenacao);
+
+function calcularTempoOrdenacao(event) {
+    event.preventDefault();
+
+    
+    const velocidade = parseFloat(document.getElementById('velocidade').value);
+    const volume = parseFloat(document.getElementById('volume').value);
+
+    if (isNaN(velocidade) || isNaN(volume) || velocidade <= 0 || volume <= 0) {
+        alert('Por favor, insira valores válidos e maiores que zero.');
+        return;
+    }
+
+    if(volume<0){
+        alert('o volume de dados não pode ser negativo.');
+        return;
+    }
+
+    const tempoMetodo1=[];
+    const tempoMetodo2=[];
+    const tempoMetodo3=[];
+    const volumes=[];
+
+    for(let i=1;i<=20;i++){
+        const volumeatual=volume*(i/20);
+        volumes.push(volumeatual);
+
+        tempoMetodo1.push(volumeatual/velocidade);
+        tempoMetodo2.push(Math.pow(volumeatual,2)/velocidade);
+        tempoMetodo3.push(Math.pow(volumeatual,3)/velocidade);
+    }
+    
+    const resultadosDiv = document.getElementById('f3-resultado');
+    resultadosDiv.innerHTML = `
+        <p><strong>Método Bubble Sort:</strong> O tempo aumenta de forma quadrática com o volume de dados.</p>
+        <p><strong>Método Merge Sort:</strong> O tempo cresce de forma log-linear, eficiente para grandes volumes.</p>
+        <p><strong>Método Quick Sort:</strong> O tempo cresce log-linear, mas mais rápido que Merge Sort devido ao menor fator constante.</p>
+    `;
+
+    // Exibe o gráfico
+    document.getElementById('container-grafico3').style.display = 'block';
+    desenharGraficoOrdenacao(volumes, tempoMetodo1, tempoMetodo2, tempoMetodo3);
+}
+
+let chartInstance3;
+function desenharGraficoOrdenacao(tamanhos, temposBubble, temposMerge, temposQuick) {
+    const containerChart = document.querySelector('#grafico3');
+    const context = containerChart.getContext('2d');
+
+    if (chartInstance3) {
+        chartInstance3.destroy();
+    }
+
+    chartInstance3 = new Chart(context, {
+        type: 'line',
+        data: {
+            labels: tamanhos.map(t => `${t.toFixed(2)} MB`),
+            datasets: [
+                {
+                    label: 'Bubble Sort',
+                    data: temposBubble,
+                    borderColor: 'red',
+                    fill: false,
+                },
+                {
+                    label: 'Merge Sort',
+                    data: temposMerge,
+                    borderColor: 'blue',
+                    fill: false,
+                },
+                {
+                    label: 'Quick Sort',
+                    data: temposQuick,
+                    borderColor: 'green',
+                    fill: false,
+                },
+            ],
+        },
+        options: {
+            responsive: true,
+            
+            scales: {
+                x: {
+                    title: {
+                        display: true,
+                        text: 'Volume de Dados (MB)',
+                    },
+                },
+                y: {
+                    title: {
+                        display: true,
+                        text: 'Tempo de Processamento (s)',
+                    },
+                },
+            },
+        },
+    });
+    window.addEventListener('resize', function() {
+        if (chartInstance) {
+            chartInstance.resize();
+        }
+    });
+
 }

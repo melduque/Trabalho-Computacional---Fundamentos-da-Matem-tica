@@ -110,3 +110,16 @@ table th, table td {
     padding: 10px;
     border: 1px solid #ccc;
 }
+
+    .container-grafico {
+        width: 100%;
+        position:relative;
+        margin: 0 auto;
+        max-width: auto;
+    }
+    canvas {
+    width: 100%; /* Ajusta ao contêiner */
+    max-width:auto; /* Largura máxima */
+    height: 400px; /* Altura fixa */
+    display:block;
+}
