@@ -26,20 +26,22 @@ exibirResultados.style.display='block';
 function calcularInvestimento(event) {
     event.preventDefault(); 
 
-    const capital = parseFloat(document.getElementById('capital1').value);
-    const tempo = parseFloat(document.getElementById('tempo1').value);
-    const taxa = parseFloat(document.getElementById('taxa1').value) / 100;
-    const taxaIPCA = parseFloat(document.getElementById('taxaipca1').value) / 100;
+    let capital = parseFloat(document.getElementById('capital1').value);
+    let tempo = parseFloat(document.getElementById('tempo1').value);
+    let taxa = parseFloat(document.getElementById('taxa1').value) / 100;
+    let taxaIPCA = parseFloat(document.getElementById('taxaipca1').value) / 100;
+
 
     if (isNaN(capital) || isNaN(tempo) || isNaN(taxa) || isNaN(taxaIPCA)) {
         alert('Por favor, insira valores válidos.');
         return;
     }
 
-    const montantesTaxa = [];
-    const montantesIPCA = [];
-    const tempos = [];
-    for (let t = 0; t <= tempo; t += tempo / 10) {
+    let montantesTaxa = [];
+    let montantesIPCA = [];
+    let tempos = [];
+
+    for (let t = 0; t <= tempo; t += tempo/10) {
         tempos.push(t);
         montantesTaxa.push(capital * Math.pow(1 + taxa, t));
         montantesIPCA.push(capital * Math.pow(1 + taxaIPCA, t));
@@ -156,7 +158,7 @@ function calcularInvestimentoComAportes(event) {
     let montanteTaxaAtual = capital;
     let montanteIPCAAtual = capital;
 
-    for (let t = 0; t <= tempo; t++) {
+    for (let t = 0; t <= tempo;  t++) {
         tempos.push(t);
         if (t > 0) {
         
@@ -271,16 +273,18 @@ function calcularTempoOrdenacao(event) {
         const volumeatual=volume*(i/20);
         volumes.push(volumeatual);
 
-        tempoMetodo1.push(volumeatual/velocidade);
-        tempoMetodo2.push(Math.pow(volumeatual,2)/velocidade);
-        tempoMetodo3.push(Math.pow(volumeatual,3)/velocidade);
+        
+        tempoMetodo1.push(Math.pow(volumeatual, 2) / velocidade);
+        tempoMetodo2.push(((Math.log(volumeatual)/Math.log(2)) * volumeatual) / velocidade);
+        tempoMetodo3.push(((Math.log(volumeatual)/Math.log(2)) * volumeatual) / velocidade);
+
     }
     
     const resultadosDiv = document.getElementById('f3-resultado');
     resultadosDiv.innerHTML = `
         <p><strong>Método Bubble Sort:</strong> O tempo aumenta de forma quadrática com o volume de dados.</p>
         <p><strong>Método Merge Sort:</strong> O tempo cresce de forma log-linear, eficiente para grandes volumes.</p>
-        <p><strong>Método Quick Sort:</strong> O tempo cresce log-linear, mas mais rápido que Merge Sort devido ao menor fator constante.</p>
+        <p><strong>Método Quick Sort:</strong> O tempo cresce log-linear de forma semelhante ao Merge Sort e tende até a ser ligeiramente melhor na maioria dos casos, mas seu pior caso possui complexidade quadrática.</p>
     `;
 
     // Exibe o gráfico
