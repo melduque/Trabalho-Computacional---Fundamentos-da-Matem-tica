@@ -91,20 +91,28 @@
             <canvas id="grafico3"></canvas>
         </div>
     </div>
+    
     <div id="funcao4" class="funcao" style="display:none">
         <h2>Cálculo da raiz de uma função</h2>
         <h3>Pelo método da bisseção</h3>
         <form>
             <label for="inicio">Início do intervalo:</label>
             <input type="number" id="inicio" name="inicio" required>
-    
+            <br>
             <label for="fim">Fim do intervalo:</label>
             <input type="number" id="fim" name="fim" required>
-    
+            <br>
             <label for="max-iteracoes">Número máximo de iterações:</label>
             <input type="number" id="max-iteracoes" name="max-iteracoes" required>
-    
-            <fieldset>
+            <br>
+            <label for="tipoFuncao">Tipo da Função</label>
+            <select name="Função" id="tipoFuncao">
+                <option value="" disabled selected>Selecione</option>
+                <option value="Polinomial">Polinomial</option>
+                <option value="Exponencial">Exponencial</option>
+            </select>
+            <br>
+            <fieldset id="polinomial" style="display:none">
                 <legend>Função Polinomial</legend>
                 <label for="grau">Grau do polinômio:</label>
                 <input type="number" id="grau" name="grau" required>
@@ -112,12 +120,12 @@
                 <label for="coeficientes">Coeficientes do polinômio (separados por vírgulas):</label>
                 <input type="text" id="coeficientes" name="coeficientes" placeholder="Ex: 3,2,-1">
             </fieldset>
-    
-            <fieldset>
+            
+            <fieldset id="exponencial" style="display:none">
                 <legend>Função Exponencial</legend>
                 <label for="k">k:</label>
                 <input type="number" id="k" name="k">
-    
+                
                 <label for="p">p:</label>
                 <input type="number" id="p" name="p">
     
@@ -127,8 +135,8 @@
                 <label for="q">q:</label>
                 <input type="number" id="q" name="q">
             </fieldset>
-    
-            <button id="f4-calcular" class="botao2">Calcular</button>
+            <button id="f4-calcular" class="botao2" style="display:none">Calcular</button>
+            <br>
             <div id="f4-resultado" style="display: none">
                 <table>
                     <thead>

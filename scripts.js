@@ -352,3 +352,27 @@ function desenharGraficoOrdenacao(tamanhos, temposBubble, temposMerge, temposQui
     });
 
 }
+
+//Função 4) Cálculo da raiz de uma função pelo método da bisseção
+
+let funcaoEscolhida = document.getElementById('tipoFuncao');
+
+funcaoEscolhida.oninput = function(){
+    if(funcaoEscolhida.value == 'Exponencial'){
+        document.getElementById('exponencial').style.display = 'block';
+        document.getElementById('polinomial').style.display = 'none';
+    }
+    else{
+        document.getElementById('polinomial').style.display = 'block';
+        document.getElementById('exponencial').style.display = 'none';
+
+        let inicioIntervalo = document.getElementById('inicio').value;
+        let fimIntervalo = document.getElementById('fim').value;
+        let iteracoes = document.getElementById('max-iteracoes').value;
+        let grau = document.getElementById('grau').value;
+        let coeficientes = document.getElementById('coeficientes').value.split(',');
+    }
+    document.getElementById('f4-calcular').style.display = 'block';
+};
+
+
