@@ -281,10 +281,30 @@ function calcularTempoOrdenacao(event) {
     }
     
     const resultadosDiv = document.getElementById('f3-resultado');
+    const tempoTabela = volumes.map((v, i) => `
+        <tr>
+            <td>${v.toFixed(2)} MB</td>
+            <td>${tempoMetodo1[i].toFixed(2)} s</td>
+            <td>${tempoMetodo2[i].toFixed(2)} s</td>
+            <td>${tempoMetodo3[i].toFixed(2)} s</td>
+        </tr>
+    `).join('');
+
     resultadosDiv.innerHTML = `
-        <p><strong>Método Bubble Sort:</strong> O tempo aumenta de forma quadrática com o volume de dados.</p>
-        <p><strong>Método Merge Sort:</strong> O tempo cresce de forma log-linear, eficiente para grandes volumes.</p>
-        <p><strong>Método Quick Sort:</strong> O tempo cresce log-linear de forma semelhante ao Merge Sort e tende até a ser ligeiramente melhor na maioria dos casos, mas seu pior caso possui complexidade quadrática.</p>
+    <p><strong>Método Bubble Sort:</strong> O tempo aumenta de forma quadrática com o volume de dados.</p>
+    <p><strong>Método Merge Sort:</strong> O tempo cresce de forma log-linear, eficiente para grandes volumes.</p>
+    <p><strong>Método Quick Sort:</strong> O tempo cresce log-linear de forma semelhante ao Merge Sort e tende até a ser ligeiramente melhor na maioria dos casos, mas seu pior caso possui complexidade quadrática.</p>
+    <table>
+        <thead>
+            <tr>
+                <th>Volume de Dados</th>
+                <th>Bubble Sort</th>
+                <th>Merge Sort</th>
+                <th>Quick Sort</th>
+            </tr>
+        </thead>
+        <tbody>${tempoTabela}</tbody>
+    </table> <br>
     `;
 
     // Exibe o gráfico
