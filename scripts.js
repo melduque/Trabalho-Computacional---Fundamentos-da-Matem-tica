@@ -373,6 +373,77 @@ funcaoEscolhida.oninput = function(){
         let coeficientes = document.getElementById('coeficientes').value.split(',');
     }
     document.getElementById('f4-calcular').style.display = 'block';
+
+    // Função principal que calcula a raiz de um polinômio usando o método da bisseção.
+function calcularRaizPolinomial(event) {
+    // Previne o comportamento padrão do formulário (recarregar a página).
+    event.preventDefault();
+
+    // Obtém o valor inicial do intervalo de busca da raiz.
+    const inicio = parseFloat(document.getElementById('inicio').value);
+    // Obtém o valor final do intervalo de busca da raiz.
+    const fim = parseFloat(document.getElementById('fim').value);
+    // Obtém o número máximo de iterações permitido para o cálculo.
+    const iteracoes = parseInt(document.getElementById('max-iteracoes').value);
+    // Obtém os coeficientes do polinômio como uma lista de números.
+    const coeficientes = document.getElementById('coeficientes').value
+        .split(',') // Separa os coeficientes por vírgulas.
+        .map(parseFloat); // Converte cada elemento da lista para um número.
+
+    // Verifica se algum dos valores inseridos é inválido.
+    if (isNaN(inicio) || isNaN(fim) || isNaN(iteracoes) || coeficientes.some(isNaN)) {
+        alert('Insira valores válidos.'); // Exibe um alerta em caso de erro.
+        return; // Interrompe a execução da função.
+    }
+
+    // Função que calcula o valor do polinômio para um dado valor de x.
+    function polinomio(x) {
+        // Calcula o polinômio usando a fórmula geral e os coeficientes.
+        return coeficientes.reduce(
+            (acc, coef, i) => acc + coef * Math.pow(x, coeficientes.length - 1 - i),
+            0
+        );
+    }
+
+    // Define os limites iniciais do intervalo de busca.
+    let a = inicio, b = fim, raiz = null;
+
+    // Loop para realizar o cálculo iterativo do método da bisseção.
+    for (let i = 0; i < iteracoes; i++) {
+        // Calcula o ponto médio do intervalo atual.
+        const meio = (a + b) / 2;
+        // Calcula o valor do polinômio no ponto médio.
+        const fMeio = polinomio(meio);
+
+        // Verifica se o valor no ponto médio é suficientemente próximo de zero (precisão).
+        if (Math.abs(fMeio) < 1e-7) {
+            raiz = meio; // Define o ponto médio como a raiz aproximada.
+            break; // Interrompe o loop.
+        }
+
+        // Determina em qual subintervalo está a raiz, com base no sinal do produto.
+        if (polinomio(a) * fMeio < 0) {
+            b = meio; // A raiz está no intervalo [a, meio].
+        } else {
+            a = meio; // A raiz está no intervalo [meio, b].
+        }
+    }
+
+    // Exibe os resultados na página.
+    document.getElementById('f4-resultado').style.display = 'block';
+    // Preenche a tabela com os valores finais do intervalo e a raiz aproximada.
+    document.getElementById('f4-tabela').innerHTML = `
+        <tr>
+            <td>${a}</td> <!-- Limite inferior final. -->
+            <td>${b}</td> <!-- Limite superior final. -->
+            <td>${raiz}</td> <!-- Raiz aproximada encontrada. -->
+        </tr>
+    `;
+}
+
+// Associa a função calcularRaizPolinomial ao evento de clique no botão de cálculo.
+document.getElementById('f4-calcular').addEventListener('click', calcularRaizPolinomial);
+
 };
 
 
