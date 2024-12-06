@@ -378,6 +378,7 @@ function desenharGraficoOrdenacao(tamanhos, temposBubble, temposMerge, temposQui
 let funcaoEscolhida = document.getElementById('tipoFuncao');
 
 funcaoEscolhida.oninput = function(){
+    document.getElementById('f4-calcular').style.display = 'block';
     if(funcaoEscolhida.value == 'Exponencial'){
         document.getElementById('exponencial').style.display = 'block';
         document.getElementById('polinomial').style.display = 'none';
@@ -386,14 +387,64 @@ funcaoEscolhida.oninput = function(){
         document.getElementById('polinomial').style.display = 'block';
         document.getElementById('exponencial').style.display = 'none';
 
+
         let inicioIntervalo = document.getElementById('inicio').value;
         let fimIntervalo = document.getElementById('fim').value;
         let iteracoes = document.getElementById('max-iteracoes').value;
-        let grau = document.getElementById('grau').value;
-        let coeficientes = document.getElementById('coeficientes').value.split(',');
-    }
-    document.getElementById('f4-calcular').style.display = 'block';
 
+        
+        document.getElementById('f4-resultado').style.display = 'block';
+        
+        if (isNaN(inicioIntervalo) || isNaN(fimIntervalo) || isNaN(iteracoes)) {
+            alert('Insira valores válidos.'); 
+            return;
+        }
+        else{
+            let calcular = document.getElementById('f4-calcular');        
+            calcular.onclick = function (event){
+                event.preventDefault();
+                let grau = document.getElementById('grau').value;
+                let coeficientes = document.getElementById('coeficientes').value.split(',');
+                if (isNaN(grau) || coeficientes == null) {
+                    alert('Insira valores válidos.'); 
+                    return;
+                }
+
+                for (let i = 0; i < iteracoes && ((inicioIntervalo + fimIntervalo) / 2) > 0.0005; i++){
+                    let meioIntervalo = (inicioIntervalo + fimIntervalo) / 2;
+                    let resultados = [0, 0, 0];
+                    for(let j = coeficientes.length - 1, k = 0; j >= 0; j--, grau--, k++){
+                        resultados[0] += coeficientes[k] * Math.pow(inicioIntervalo, grau);
+                        console.log(coeficientes[k] * Math.pow(inicioIntervalo, grau));
+                        resultados[1] += coeficientes[k] * Math.pow(meioIntervalo, grau);
+                        console.log(coeficientes[k] * Math.pow(meioIntervalo, grau));
+                        resultados[2] += coeficientes[k] * Math.pow(fimIntervalo, grau);
+                        console.log(coeficientes[k] * Math.pow(fimIntervalo, grau));
+                    }
+                    
+                    document.getElementById('f4-tabela').innerHTML += `
+                        <tr>
+                            <td>${(i + 1)}</td>
+                            <td>${inicioIntervalo}</td>
+                            <td>${meioIntervalo}</td>
+                            <td>${fimIntervalo}</td>
+                            <td>${resultados[0]}</td>
+                            <td>${resultados[1]}</td>
+                            <td>${resultados[2]}</td>
+                            <td>${0.0005}</td>
+                        </tr>
+                    `;
+                    if((inicioIntervalo < 0 && meioIntervalo > 0) || (inicioIntervalo > 0 && meioIntervalo < 0)){
+                        fimIntervalo = meioIntervalo;
+                    }
+                    else if ((fimIntervalo < 0 && meioIntervalo > 0) || (fimIntervalo > 0 && meioIntervalo < 0)){
+                        inicioIntervalo = meioIntervalo;
+                    }
+                }
+            } 
+        }
+    }
+/*
     // Função principal que calcula a raiz de um polinômio usando o método da bisseção.
 function calcularRaizPolinomial(event) {
     // Previne o comportamento padrão do formulário (recarregar a página).
@@ -463,7 +514,7 @@ function calcularRaizPolinomial(event) {
 
 // Associa a função calcularRaizPolinomial ao evento de clique no botão de cálculo.
 document.getElementById('f4-calcular').addEventListener('click', calcularRaizPolinomial);
-
-};
+*/
+}
 
 
